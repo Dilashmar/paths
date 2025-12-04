@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400&display=swap');
-
 /* ============================================
    SPLASH SCREEN
    ============================================ */
@@ -117,7 +115,7 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Source Serif 4', serif;
+  font-family: 'Crimson Pro', serif;
   background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 50%, #0a0a0a 100%);
   position: relative;
 }
@@ -1200,7 +1198,7 @@
   }
 }
 
-* Scene 3: Perception Becoming Reality - Very subtle growth */
+/* Scene 3: Perception Becoming Reality - Very subtle growth */
 .perception-layer.becoming-reality {
   animation: perception-to-reality 12s ease-in-out forwards;
 }
