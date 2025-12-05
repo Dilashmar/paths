@@ -35,8 +35,8 @@ export default function MergedScene() {
   const [orbPulse, setOrbPulse] = useState(1);
 
   useEffect(() => {
-    // Scene 0 timing
-    if (evolution < 100) {
+    // Scene 0 timing - only start after user has entered
+    if (hasEntered && evolution < 100) {
       const timer1 = setTimeout(() => setAwareness(true), 4000);
       const timer2 = setTimeout(() => setInsightVisible(true), 5000);
       const timer3 = setTimeout(() => setBoundaryVisible(true), 8000);
@@ -47,7 +47,7 @@ export default function MergedScene() {
         clearTimeout(timer3);
       };
     }
-  }, [evolution]);
+  }, [hasEntered, evolution]);
 
   useEffect(() => {
     // Scene 1 evolution (100-199) - stops at 200, requires manual transition to Scene 2
@@ -179,8 +179,7 @@ export default function MergedScene() {
       ? 1 + (evolution - 100) / 100 
       : 2;  // Cap at 2 after Scene 1
 
-  // UNIFIED PROGRESS: A single variable that spans Scene 2 (0→1) and Scene 3 (1→2)
-  // CAPS AT 2 for Scene 4 - Scene 4 uses its own progress variable for contraction
+
   const scene2And3Progress = (evolution >= 200 && evolution <= 300) 
     ? (evolution - 200) / 100 
     : (evolution >= 301 && evolution <= 400) 
@@ -419,7 +418,7 @@ export default function MergedScene() {
             const scene3Text = scene2And3Progress < 1.1 
               ? "" 
               : scene2And3Progress < 1.45 
-                ? "There was never a boundary." 
+                ? "It was all an illusion." 
                 : scene2And3Progress < 1.8
                   ? "There is no self, no other."
                   : "So what remains?";
@@ -448,23 +447,23 @@ export default function MergedScene() {
               ? "Emptiness."
             
             /* Scene 2 - Dream analogy */
-            : isScene2 && scene2Progress > 0.65
+            : isScene2 && scene2Progress > 0.78
               ? "Two sides of the same experience."
-              : isScene2 && scene2Progress > 0.35
-              ? "But like in dreams, you never touch what seems external—only mind's constructions."
+              : isScene2 && scene2Progress > 0.28
+              ? "But like in dreams, you never touch what seems external, only mind's constructions."
               : isScene2
-              ? "You think you're seeing the world."
+              ? "You think you are accessing the outer world directly."
             
             /* Scene 1 - Duality assumption */
             : isScene1 && scene1Progress > 0.5 
-              ? "...and the world around you is the other that gets observed."
+              ? "...and the world around you is the other that gets perceived."
               : isScene1
-              ? "You think you are the self that observes..."
+              ? "You think you are the self that perceives..."
             
             /* Scene 0 - Opening questions */
             : insightVisible
               ? "Where is the boundary?"
-              : "Where does the observer end and the observed begin?";
+              : "Where does the perceiver end and the perceived begin?";
           
           return (
             <div 
